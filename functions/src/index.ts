@@ -3,7 +3,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { getStorage } from 'firebase-admin/storage';
 import { setGlobalOptions } from 'firebase-functions/v2';
 import { HttpsError, onCall } from 'firebase-functions/v2/https';
-import { anthropicApiKey, getClient, mapAnthropicError, MODEL } from './anthropic.js';
+import { anthropicApiKey, getClient, mapAnthropicError, MODEL, EXTRACTION_MODEL } from './anthropic.js';
 import { enforceDailyLimit } from './rateLimit.js';
 import { EXTRACTION_PROMPT, INVOICE_SCHEMA, type InvoiceExtraction } from './invoiceExtraction.js';
 
@@ -156,7 +156,7 @@ export const processInvoice = onCall<{ invoiceId: string }>(
     const client = getClient();
     try {
       const result = await client.messages.create({
-        model: MODEL,
+        model: EXTRACTION_MODEL,
         max_tokens: 2000,
         output_config: {
           format: { type: 'json_schema', schema: INVOICE_SCHEMA as unknown as Record<string, unknown> },
