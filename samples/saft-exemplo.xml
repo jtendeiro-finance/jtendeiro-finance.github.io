@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuditFile xmlns="urn:OECD:StandardAuditFile-Tax:PT_1.04_01">
+  <Header>
+    <AuditFileVersion>1.04_01</AuditFileVersion>
+    <CompanyID>509999999</CompanyID>
+    <TaxRegistrationNumber>509999999</TaxRegistrationNumber>
+    <CompanyName>Empresa Exemplo, Lda</CompanyName>
+    <FiscalYear>2026</FiscalYear>
+    <StartDate>2026-01-01</StartDate>
+    <EndDate>2026-12-31</EndDate>
+    <CurrencyCode>EUR</CurrencyCode>
+  </Header>
+  <MasterFiles>
+    <Customer>
+      <CustomerID>C001</CustomerID>
+      <AccountID>211</AccountID>
+      <CustomerTaxID>123456789</CustomerTaxID>
+      <CompanyName>Cliente Alfa, Lda</CompanyName>
+    </Customer>
+    <Customer>
+      <CustomerID>C002</CustomerID>
+      <AccountID>211</AccountID>
+      <CustomerTaxID>987654321</CustomerTaxID>
+      <CompanyName>Beta Restauração SA</CompanyName>
+    </Customer>
+    <Supplier>
+      <SupplierID>F001</SupplierID>
+      <AccountID>221</AccountID>
+      <SupplierTaxID>555000111</SupplierTaxID>
+      <CompanyName>Distribuidora Silva</CompanyName>
+    </Supplier>
+  </MasterFiles>
+  <SourceDocuments>
+    <SalesInvoices>
+      <NumberOfEntries>4</NumberOfEntries>
+      <TotalDebit>0.00</TotalDebit>
+      <TotalCredit>2150.00</TotalCredit>
+      <Invoice>
+        <InvoiceNo>FT 2026/101</InvoiceNo>
+        <InvoiceStatus>N</InvoiceStatus>
+        <InvoiceDate>2026-05-03</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <CustomerID>C001</CustomerID>
+        <DocumentTotals>
+          <TaxPayable>230.00</TaxPayable>
+          <NetTotal>1000.00</NetTotal>
+          <GrossTotal>1230.00</GrossTotal>
+        </DocumentTotals>
+      </Invoice>
+      <Invoice>
+        <InvoiceNo>FT 2026/102</InvoiceNo>
+        <InvoiceStatus>N</InvoiceStatus>
+        <InvoiceDate>2026-05-18</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <CustomerID>C002</CustomerID>
+        <DocumentTotals>
+          <TaxPayable>115.00</TaxPayable>
+          <NetTotal>500.00</NetTotal>
+          <GrossTotal>615.00</GrossTotal>
+        </DocumentTotals>
+      </Invoice>
+      <Invoice>
+        <InvoiceNo>NC 2026/7</InvoiceNo>
+        <InvoiceStatus>N</InvoiceStatus>
+        <InvoiceDate>2026-05-20</InvoiceDate>
+        <InvoiceType>NC</InvoiceType>
+        <CustomerID>C001</CustomerID>
+        <DocumentTotals>
+          <TaxPayable>23.00</TaxPayable>
+          <NetTotal>100.00</NetTotal>
+          <GrossTotal>123.00</GrossTotal>
+        </DocumentTotals>
+      </Invoice>
+      <Invoice>
+        <InvoiceNo>FT 2026/103</InvoiceNo>
+        <InvoiceStatus>A</InvoiceStatus>
+        <InvoiceDate>2026-05-22</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <CustomerID>C002</CustomerID>
+        <DocumentTotals>
+          <TaxPayable>46.00</TaxPayable>
+          <NetTotal>200.00</NetTotal>
+          <GrossTotal>246.00</GrossTotal>
+        </DocumentTotals>
+      </Invoice>
+    </SalesInvoices>
+  </SourceDocuments>
+</AuditFile>
