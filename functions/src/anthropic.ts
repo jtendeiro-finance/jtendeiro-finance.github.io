@@ -5,7 +5,11 @@ import { HttpsError } from 'firebase-functions/v2/https';
 
 export const anthropicApiKey = defineSecret('ANTHROPIC_API_KEY');
 
+/** Modelo para chat e relatórios do CFO (raciocínio estratégico). */
 export const MODEL = 'claude-opus-4-8';
+
+/** Modelo para extração de faturas (tarefa estruturada — mais rápido e barato). */
+export const EXTRACTION_MODEL = 'claude-sonnet-4-6';
 
 export function getClient(): Anthropic {
   const key = anthropicApiKey.value();
