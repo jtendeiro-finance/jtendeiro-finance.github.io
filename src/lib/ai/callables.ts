@@ -17,13 +17,16 @@ export function toApiMessages(history: ChatMessage[], limit = 12): ChatPayload['
 
 function mapFunctionsError(e: unknown): string {
   const code = (e as { code?: string }).code ?? '';
+  const message = (e as { message?: string }).message ?? '';
   if (code.includes('unauthenticated')) return 'Sessão expirada — inicie sessão novamente.';
   if (code.includes('resource-exhausted'))
     return 'Limite diário de pedidos de IA atingido. Tente novamente amanhã.';
   if (code.includes('failed-precondition'))
-    return 'O serviço de IA ainda não está configurado (ver SETUP.md).';
+    // A function envia uma mensagem específica (chave inválida, sem créditos…).
+    return message || 'O serviço de IA ainda não está configurado (ver SETUP.md).';
   if (code.includes('invalid-argument')) return 'Pedido inválido.';
   if (code.includes('not-found')) return 'Função não encontrada — faça o deploy das functions.';
+  if (code.includes('internal') && message && !/^internal$/i.test(message)) return message;
   return 'Ocorreu um erro no serviço de IA. Tente novamente.';
 }
 
