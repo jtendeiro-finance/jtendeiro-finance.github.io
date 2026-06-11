@@ -6,12 +6,12 @@
  * é garantida pelas regras do Firestore/Storage e pela autenticação).
  */
 export const firebaseConfig = {
-  apiKey: 'COLOQUE_AQUI',
-  authDomain: 'COLOQUE_AQUI.firebaseapp.com',
-  projectId: 'COLOQUE_AQUI',
-  storageBucket: 'COLOQUE_AQUI.firebasestorage.app',
-  messagingSenderId: 'COLOQUE_AQUI',
-  appId: 'COLOQUE_AQUI',
+  apiKey: 'AIzaSyCb-LrxffltVoWCBgCbybA0B60NaFcoSrI',
+  authDomain: 'cfo4you-281c7.firebaseapp.com',
+  projectId: 'cfo4you-281c7',
+  storageBucket: 'cfo4you-281c7.firebasestorage.app',
+  messagingSenderId: '1087806620879',
+  appId: '1:1087806620879:web:51468882e55bcb7a4023ba',
 };
 
 /** Verdadeiro quando a configuração ainda não foi preenchida. */
