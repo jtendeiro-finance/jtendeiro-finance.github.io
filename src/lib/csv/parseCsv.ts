@@ -1,4 +1,5 @@
 import Papa from 'papaparse';
+import { parsePtDate } from '../dates';
 
 export interface RawCsv {
   headers: string[];
@@ -31,6 +32,14 @@ export function parseCsvText(text: string): RawCsv {
   });
   const data = (result.data as string[][]).filter((r) => r.some((c) => c && c.trim() !== ''));
   if (data.length === 0) return { headers: [], rows: [] };
+
+  // Alguns bancos exportam sem linha de cabeçalho (formato "tabulado").
+  // Se a primeira linha já contém uma data, é uma linha de dados.
+  const first = data[0].map((c) => (c ?? '').trim());
+  if (first.some((c) => parsePtDate(c) !== null)) {
+    return { headers: first.map(() => ''), rows: data };
+  }
+
   const [headers, ...rows] = data;
   return { headers: headers.map((h) => (h ?? '').trim()), rows };
 }

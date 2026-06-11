@@ -22,12 +22,14 @@ interface Props {
 function ColumnSelect({
   label,
   headers,
+  examples,
   value,
   onChange,
   allowNone,
 }: {
   label: string;
   headers: string[];
+  examples: string[];
   value: number | null;
   onChange: (v: number | null) => void;
   allowNone?: boolean;
@@ -39,11 +41,15 @@ function ColumnSelect({
         onChange={(e) => onChange(e.target.value === '' ? null : Number(e.target.value))}
       >
         {allowNone && <option value="">— nenhuma —</option>}
-        {headers.map((h, i) => (
-          <option key={i} value={i}>
-            {h || `Coluna ${i + 1}`}
-          </option>
-        ))}
+        {headers.map((h, i) => {
+          const example = (examples[i] ?? '').trim().replace(/\s+/g, ' ').slice(0, 24);
+          return (
+            <option key={i} value={i}>
+              {h || `Coluna ${i + 1}`}
+              {example ? ` — ex.: ${example}` : ''}
+            </option>
+          );
+        })}
       </Select>
     </Labeled>
   );
@@ -75,7 +81,7 @@ export function CsvImportWizard({ open, onClose, onImport }: Props) {
       }
       setCsv(parsed);
       setFileName(file.name);
-      setMapping(guessMapping(parsed.headers, parsed.rows.slice(0, 10)));
+      setMapping(guessMapping(parsed.headers, parsed.rows.slice(0, 50)));
     } catch {
       toast('error', 'Não foi possível ler o ficheiro CSV.');
     }
@@ -142,18 +148,21 @@ export function CsvImportWizard({ open, onClose, onImport }: Props) {
             <ColumnSelect
               label="Data"
               headers={csv.headers}
+              examples={csv.rows[0] ?? []}
               value={mapping.dateCol}
               onChange={(v) => setMapping({ ...mapping, dateCol: v ?? 0 })}
             />
             <ColumnSelect
               label="Descrição"
               headers={csv.headers}
+              examples={csv.rows[0] ?? []}
               value={mapping.descriptionCol}
               onChange={(v) => setMapping({ ...mapping, descriptionCol: v ?? 0 })}
             />
             <ColumnSelect
               label="Montante (com sinal)"
               headers={csv.headers}
+              examples={csv.rows[0] ?? []}
               value={mapping.amountCol}
               onChange={(v) =>
                 setMapping({ ...mapping, amountCol: v, ...(v !== null ? { debitCol: null, creditCol: null } : {}) })
@@ -165,6 +174,7 @@ export function CsvImportWizard({ open, onClose, onImport }: Props) {
                 <ColumnSelect
                   label="Débito"
                   headers={csv.headers}
+                  examples={csv.rows[0] ?? []}
                   value={mapping.debitCol}
                   onChange={(v) => setMapping({ ...mapping, debitCol: v })}
                   allowNone
@@ -172,6 +182,7 @@ export function CsvImportWizard({ open, onClose, onImport }: Props) {
                 <ColumnSelect
                   label="Crédito"
                   headers={csv.headers}
+                  examples={csv.rows[0] ?? []}
                   value={mapping.creditCol}
                   onChange={(v) => setMapping({ ...mapping, creditCol: v })}
                   allowNone
